@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/salonwala",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

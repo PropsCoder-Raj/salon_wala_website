@@ -1,0 +1,155 @@
+.flex-box {
+  display: flex;
+  align-items: center;
+
+}
+
+.container {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.flex-item {
+  flex: 1;
+}
+
+.row>* {
+  padding-right: unset;
+}
+
+.shop-title {
+  font-size: 16px;
+  color: #252525;
+  text-transform: capitalize;
+}
+
+.price {
+  font-size: 14px;
+
+  i {
+    font-size: 14px;
+    margin-right: 5px;
+  }
+
+  .amount {
+    font-size: 12px;
+  }
+}
+
+.rating {
+  color: green !important;
+  font-size: 14px;
+
+  i {
+    color: green !important;
+    font-size: 14px;
+  }
+
+  .count {
+    font-size: 12px;
+  }
+}
+
+.timing {
+  color: green !important;
+  font-size: 14px;
+
+  i {
+    color: #757575;
+    font-size: large;
+    min-width: 25px;
+  }
+
+  .time {
+    font-size: 13px;
+  }
+}
+
+.location {
+  color: green !important;
+  font-size: 14px;
+
+  i {
+    color: #757575;
+    font-size: large;
+    min-width: 25px;
+  }
+
+  .short-address {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
+
+.services {
+  margin-top: 15px;
+
+  .services-text {
+    font-size: 10px;
+    line-height: 1.5;
+  }
+}
+
+
+.addSection {
+  text-align: right;
+  padding-right: 10px !important;
+
+  .add-button {
+    background: #c7b270;
+    width: auto;
+    font-size: small;
+    color: white;
+  }
+
+  mat-icon {
+    color: #c7b270;
+    font-weight: bold;
+  }
+}
+
+.viewDetails {
+  font-size: small;
+  padding: unset;
+  color: blue;
+}
+
+.rupeeTitle {
+  font-size: small;
+  padding: unset !important;
+  color: gray;
+}
+
+.provider-card {
+  cursor: pointer;
+  border-radius: 6px;
+
+  img {
+    border-radius: 4px;
+    margin: 10px;
+    height: 180px;
+    width: auto;
+  }
+}
+
+.subscribe-box{
+  .checkoutButton {
+      background: #c7b270;
+      width: auto;
+      font-size: small;
+      color: white;
+  }
+
+  .checkoutButton:hover{
+      background: #323232;
+      color: white;;
+  }
+
+  button{
+      float: right;
+  }
+
+  input{
+      width: calc(100% - 300px);
+  }
+}

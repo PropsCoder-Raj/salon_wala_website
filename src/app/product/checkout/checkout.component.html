@@ -1,0 +1,244 @@
+ <!-- Breadcrumb Area Start Here -->
+ <div class="breadcrumb-area">
+   <div class="container">
+     <ol class="breadcrumb breadcrumb-list">
+       <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+       <li class="breadcrumb-item active">Checkout</li>
+     </ol>
+   </div>
+ </div>
+ 
+ <div id="closeForm" (click)="loading = !loading"></div>
+ <!-- Breadcrumb Area End Here -->
+ <!-- coupon-area start -->
+ <div class="coupon-area white-bg pt-90 pb-30">
+   <div class="container">
+     <div class="row">
+       <div class="col-md-12">
+         <div class="coupon-accordion">
+           <!-- Accordion Start -->
+           <h3>Have a coupon? <span (click)="showCoupon()">Click here to enter your code</span></h3>
+           <div id="checkout_coupon" class="coupon-checkout-content">
+             <div class="coupon-info">
+               <form action="#">
+                 <p class="checkout-coupon">
+                   <input type="text" class="code" placeholder="Coupon code" [(ngModel)]="couponCode" [ngModelOptions]="{standalone: true}" [disabled]="referralcodeStatus || couponApplyStatus" />
+                   <input type="submit" (click)="applyCopon()" value="Apply Coupon" />
+                 </p>
+               </form>
+             </div>
+           </div>
+           <!-- ACCORDION END -->
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+ <!-- coupon-area end -->
+ <!-- checkout-area start -->
+ <div class="checkout-area white-bg pb-90">
+   <div class="container">
+     <div class="row">
+       <div class="col-lg-6 col-md-6">
+         <div class="checkbox-form mb-sm-40">
+           <h3>Billing Details</h3>
+
+           <div class="row">
+             <div class="col-lg-6 col-md-6">
+               <h6>Delivery Address</h6>
+             </div>
+             <div class="col-lg-6 col-md-6">
+               <span style="float: right;color: brown;cursor: pointer;" *ngIf="!changeAddress && !newAddress"
+                 (click)="changeAddress = !changeAddress">Change Address</span>
+               <span style="float: right;color: brown;cursor: pointer;" *ngIf="changeAddress && !newAddress"
+                 (click)="changeAddress = !changeAddress;">Close</span>
+             </div>
+           </div>
+           <div class="row mtb-20" *ngIf="!changeAddress && !newAddress">
+             <div class="col-md-12 col-lg-12">
+               <div class="card">
+                <div class="card-body">
+                  {{name}}
+                  <div>{{companyName}}</div>
+                  <div>{{street}} {{city}}</div>
+                  <div>{{state}} {{postalCode}}</div>
+                  <div>{{ countryName }}</div>
+                </div>
+               </div>
+             </div>
+           </div>
+
+           
+           <div class="row mtb-20" *ngIf="changeAddress">
+             
+            <div class="card">
+              <div class="card-body">
+                <ng-container *ngFor="let item of addressList; let i = index">
+                  <div class="col-md-12 col-lg-12 mtb-10">
+                    <input type="radio" name="optionsRadios" [checked]="i === addressIndex" id="optionsRadios{{ i + 1 }}" (click)="addressSetUp(item.data, i);changeAddress = !changeAddress;" style="cursor: pointer;">
+                    {{item.data.name}}
+                    {{item.data.companyName}}
+                    {{item.data.street}} {{item.data.city}}
+                    {{item.data.state}} {{item.data.postalCode}}
+                  </div>
+                </ng-container>  
+              </div>
+            </div>    
+          </div>
+
+          <div class="mtb-10" *ngIf="changeAddress && !newAddress">
+            <span style="color: brown;cursor: pointer;" (click)="newAddress = !newAddress; clearAddressSetUp(); changeAddress = false">New Address</span>
+          </div>
+
+           <!-- <div class="row">
+             <div class="col-md-12 col-lg-12">
+               <div class="grid-list-view d-flex align-items-center mtb-20">
+                 <ul class="nav tabs-area d-flex align-items-center">
+                   <li><a style="font-size: medium;margin: 0 10px;" class="active" data-bs-toggle="tab"
+                       href="#address-view" (click)="clearAddressSetUp()">New Address</a></li>
+                   <ng-container *ngFor="let item of addressList; let i = index">
+                     <li><a style="font-size: medium;margin: 0 10px;" data-bs-toggle="tab" href="#address-view{{i}}"
+                         (click)="addressSetUp(item.data)">Adderss {{ i + 1 }}</a></li>
+                   </ng-container>
+                 </ul>
+               </div>
+             </div>
+           </div> -->
+
+           <div class="row mt-30" *ngIf="newAddress">
+            <div class="card">
+              <div class="card-body">
+                <div class="col-md-12">
+                  <div class="country-select clearfix mb-30">
+                    <label>Country <span class="required">*</span></label>
+                    <select class="wide" [(ngModel)]="country">
+                      <option value="" disabled>--SELECT--</option>
+                      <ng-container *ngFor="let item of countryList">
+                        <option value="{{item.code}}">{{item.name}}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="checkout-form-list mb-sm-30">
+                    <label>First Name <span class="required">*</span></label>
+                    <input type="text" placeholder="Enter First Name" [(ngModel)]="firstName">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="checkout-form-list mb-30">
+                    <label>Last Name <span class="required">*</span></label>
+                    <input type="text" placeholder="Enter Last Name" [(ngModel)]="lastName" />
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="checkout-form-list mb-30">
+                    <label>Company Name</label>
+                    <input type="text" placeholder="Enter Company Name" [(ngModel)]="companyName" />
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="checkout-form-list mb-30">
+                    <label>Address <span class="required">*</span></label>
+                    <input type="text" placeholder="Street address" [(ngModel)]="street" />
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="checkout-form-list mb-30">
+                    <label>Town / City <span class="required">*</span></label>
+                    <input type="text" placeholder="Town / City" [(ngModel)]="city" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="checkout-form-list mb-30">
+                    <label>State <span class="required">*</span></label>
+                    <input type="text" placeholder="State" [(ngModel)]="state" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="checkout-form-list mb-30">
+                    <label>Postcode / Zip <span class="required">*</span></label>
+                    <input type="text" placeholder="Postcode / Zip" [(ngModel)]="postalCode" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="checkout-form-list mb-30">
+                    <label>Email Address <span class="required">*</span></label>
+                    <input type="email" placeholder="" [(ngModel)]="email" disabled />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="checkout-form-list mb-30">
+                    <label>Phone <span class="required">*</span></label>
+                    <input type="text" placeholder="Mobile No" [(ngModel)]="mobile" />
+                  </div>
+                </div>
+              </div>
+            </div>   
+           </div>
+         </div>
+       </div>
+       <div class="col-lg-6 col-md-6">
+         <div class="your-order">
+           <h3>Your order</h3>
+           <div class="your-order-table table-responsive">
+             <table>
+               <thead>
+                 <tr>
+                   <th class="product-name">Product</th>
+                   <th class="product-total">Total</th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr class="cart_item" *ngFor="let item of cartS.carts">
+                   <td class="product-name">
+                     {{ item.name }} <span class="product-quantity"> × {{ item.num }}</span>
+                   </td>
+                   <td class="product-total">
+                     <span class="amount">₹{{item.price * item.num}}</span>
+                   </td>
+                 </tr>
+               </tbody>
+               <tfoot>
+                 <tr class="cart-subtotal">
+                   <th>Cart Subtotal</th>
+                   <td><span class="amount">₹{{cartS.totalAmount}}</span></td>
+                 </tr>
+                 <tr class="cart-subtotal">
+                   <th>Taxes Subtotal</th>
+                   <td><span class="amount">₹{{cartS.taxesAmount | number : '1.2-2'}}</span></td>
+                 </tr>
+                 <tr class="cart-subtotal" *ngIf="cartS.discountAmount !== 0">
+                   <th>Discount</th>
+                   <td><span class="amount">₹{{cartS.discountAmount}} <span *ngIf="cartS.discountPercentage !== 0">({{cartS.discountPercentage}} %)</span></span></td>
+                 </tr>
+                 <tr class="order-total">
+                   <th>Order Total</th>
+                   <td>
+                    <ng-container *ngIf="cartS.walletPaymentStatus === 'isEqual' || cartS.walletPaymentStatus === 'lessThan'">
+                      <span class="total amount">₹ {{cartS.finalTotalPayAmount}}</span>
+                    </ng-container>
+                    <ng-container *ngIf="cartS.walletPaymentStatus === 'greaterThan'">
+                      <span class="total amount">₹ {{cartS.finalTotalPayAmount}}</span>
+                      <ng-container *ngIf="cartS.walletAction === true">
+                        <span style="color: black;font-size: small;"> + {{cartS.balance}} Wallet</span>
+                      </ng-container>
+                    </ng-container>
+                   </td>
+                 </tr>
+               </tfoot>
+             </table>
+           </div>
+           <div class="payment-method">
+             <div id="accordion">
+               <div style="text-align: center;">
+                 <button class="return-customer-btn" (click)="payment()">Payment <i class="fa fa-circle-o-notch fa-spin"
+                     *ngIf="loading" aria-hidden="true"></i></button>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>

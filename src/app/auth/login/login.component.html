@@ -1,0 +1,57 @@
+<!-- Breadcrumb Area Start Here -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb-list">
+            <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+            <li class="breadcrumb-item active">Login</li>
+        </ol>
+    </div>
+</div>
+<!-- Breadcrumb Area End Here -->
+<!-- Login Page Start Here -->
+<div class="login ptb-90">
+    <div class="container">
+        <h3 class="login-header text-center">Log in to your account </h3>
+        <div class="row">
+            <div class="col-xl-6 col-lg-8 offset-xl-3 offset-lg-2">
+                <div class="login-form">
+                    <form>
+                        <div class="form-group row mb-20">
+                            <label for="email" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="email" placeholder="Email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+                        <div class="form-group row mb-20">
+                            <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
+                            <div class="col-sm-7 position-relative">
+                                <input *ngIf="!showHidePassword" type="password" class="form-control" id="inputPassword" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" placeholder="Password">
+                                <input *ngIf="showHidePassword" type="text" class="form-control" id="inputPassword" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" placeholder="Password">
+                                <button class="btn show-btn" type="button" (click)="showHidePassword = !showHidePassword">Show</button>
+                            </div>
+                        </div>
+                        <div class="login-details text-center mb-25">
+                            <a [routerLink]="['/auth/forgot-password']">Forgot your password? </a>
+                            <button type="submit" class="login-btn" (click)="login()">Sign in <i class="fa fa-circle-o-notch fa-spin" *ngIf="loading" aria-hidden="true"></i></button>
+                        </div>
+                        <div class="login-footer text-center">
+                            <p>No account? <a [routerLink]="['/auth/register']">Create New</a></p>
+                        </div>
+
+                        <div class="row" style="margin-top: 30px;">
+                            <div class="col-lg-12 text-center">
+                                <button class="google-login-btn" (click)="loginWithGoogle()">
+                                    <img src="assets/google.png" alt="">
+                                </button>
+                                <button class="facebook-login-btn" (click)="loginWithFacebook()">
+                                    <img src="assets/facebook.png" alt="">
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Login Page End Here -->

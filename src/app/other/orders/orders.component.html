@@ -1,0 +1,110 @@
+<!-- Breadcrumb Area Start Here -->
+<div class="breadcrumb-area">
+  <h3 class="text-center text-primary" style="text-align: center;">Orders</h3>
+</div>
+<!-- Breadcrumb Area End Here -->
+<!-- Wish List Start -->
+<div class="cart-main-area wish-list white-bg ptb-90">
+
+  <div class="container" *ngIf="ordersCount === 0">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="text-center">
+          <img src="assets/img/shopping-bag.png" style="height: 20rem;width: 20rem;" alt="">
+        </div>
+        <div class="text-center" style="margin-top: 30px;">
+          <b style="font-size: x-large;">No orders available</b>
+        </div>
+        <div class="text-center" style="margin-top: 30px;">
+          <a [routerLink]="['/']" class="cart-checkout" style="background: black;padding: 15px 20px;border-radius: 10px;cursor: pointer;">Let's Shopping</a>
+          <!-- <button [routerLink]="['/']" type="submit">Let's Shopping</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" *ngIf="ordersCount > 0">
+    <div class="row">
+      <ng-container *ngFor="let item of ordersList; let i = index">
+        <div class="col-md-12 col-sm-12 col-xs-12 mtb-20">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-header p-10" style="border-radius: 15px 15px 0px 0px;">
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="row">
+                    <div class="mtb-10 col-xs-6 col-sm-6 col-md-2 col-lg-3">
+                      <p style="text-transform: uppercase;color: darkgray;">Order Placed</p>
+                      <h6 style="text-transform: capitalize;">{{item.data.createdAt | date : 'dd MMMM yyyy, hh:mm a'}}
+                      </h6>
+                    </div>
+                    <div class="mtb-10 col-xs-6 col-sm-6 col-md-1 col-lg-1">
+                      <p style="text-transform: uppercase;color: darkgray;">Total</p>
+                      <h6 style="text-transform: capitalize;white-space: nowrap;">₹ {{item.data.total | number : '1.2-2'}}</h6>
+                    </div>
+                    <div class="mtb-10 col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                      <p style="text-transform: uppercase;color: darkgray;">Shipping To</p>
+                      <h6 style="text-transform: capitalize;">{{name}}</h6>
+                    </div>
+                    <div class="mtb-10 col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                      <p style="text-transform: uppercase;color: darkgray;">Status</p>
+                      <h6 style="text-transform: capitalize;">
+                        <span style="font-size:small" *ngIf="item.data.fulfillmentStatus === 'DELIVERED'" > DELIVERED</span>
+                          <span style="font-size:small" *ngIf="item.data.fulfillmentStatus === 'WILL_NOT_DELIVER'" >WILL NOT DELIVER</span>
+                          <span style="font-size:small" *ngIf="item.data.fulfillmentStatus === 'RETURNED'" > RETURNED</span>
+                          <span style="font-size:small" *ngIf="item.data.fulfillmentStatus === 'AWAITING_PROCESSING'" >ORDER RECEIVED</span>
+                          <span style="font-size:small" *ngIf="item.data.fulfillmentStatus === 'PROCESSING'" > ORDER RECEIVED</span>
+                          <span style="font-size:small" *ngIf="item.data.fulfillmentStatus === 'SHIPPED'" > SHIPPED</span>
+                          <span style="font-size:small" *ngIf="item.data.fulfillmentStatus === 'READY_FOR_PICKUP'" >READY FOR PICKUP</span>
+                          <span style="font-size:small" *ngIf="item.data.fulfillmentStatus === 'OUT_FOR_DELIVERY'" >OUT FOR DELIVERY</span>
+                        </h6>
+                    </div>
+                    <div class="mtb-10 col-xs-6 col-sm-6 col-md-3 col-lg-2"></div>
+                    <div class="mtb-10 col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                      <p style="text-transform: uppercase;color: darkgray;">Order Id</p>
+                      <h6 style="text-transform: capitalize;">{{item.data.orderId}}</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12 col-md-12">
+                  <div class="row">
+                    <ng-container *ngFor="let product of item.products">
+                      <div class="col-lg-6 col-md-6">
+                        <div class="row mtb-10">
+                            <div class="col-lg-5">
+                                <a><img src="{{baseURL}}/retrieve/{{product.data.media[0].url}}" style="height: 250px;width: 100%;" alt="product-img"></a>
+                            </div>
+                            <div class="col-lg-7">
+                                <div>
+                                  <h4 style="margin-bottom: unset;" class="pro-title"><a style="white-space: pre-wrap;">{{product.data.name}} X {{product.qty}}</a>
+                                  </h4>
+                                  <p><span class="price">₹{{product.data.price}}</span></p>
+                                </div>
+                                <div style="margin: 30px 0;">
+                                  <div *ngFor="let item of product.taxes; let i = index">
+                                    {{item.data.name}} tax : ₹ {{item.taxAmount | number : '1.2-2'}}
+                                  </div>
+                                </div>  
+                                <div class="mt-20">
+                                  <h4 class="pro-title" style="margin-bottom: unset;"><a>Seller</a></h4>
+                                  <p><span class="price" style="color: brown;">Tectiq Technology Pvt. Ltd.</span></p>
+                                </div>  
+                            </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <!-- Row End -->
+  </div>
+</div>
+<!-- Wish List End -->

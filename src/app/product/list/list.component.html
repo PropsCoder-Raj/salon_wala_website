@@ -1,0 +1,134 @@
+ <!-- Breadcrumb Area Start Here -->
+ <div class="breadcrumb-area">
+
+ </div>
+ <!-- Breadcrumb Area End Here -->
+ <!-- Shop Page Start -->
+ <div class="main-shop-page ptb-90">
+   <div class="container">
+     <!-- Row End -->
+     <div class="row">
+       <div class="col-lg-12 order-1 order-lg-2">
+         <!-- Grid & List View Start -->
+         <div
+           class="grid-list-top border-default universal-padding d-md-flex justify-content-md-between align-items-center mb-30">
+           <div class="grid-list-view d-flex align-items-center  mb-sm-15">
+             <ul class="nav tabs-area d-flex align-items-center">
+               <li><a class="active" data-bs-toggle="tab" href="#grid-view"><i class="fa fa-th"></i></a></li>
+               <li><a data-bs-toggle="tab" href="#list-view"><i class="fa fa-list-ul"></i></a></li>
+             </ul>
+             <span class="show-items">There are {{productsCount}} products.</span>
+           </div>
+           <!-- Toolbar Short Area Start -->
+           <div class="main-toolbar-sorter clearfix">
+             <div class="toolbar-sorter d-md-flex align-items-center">
+               <label>Sort By:</label>
+               <select class="sorter wide">
+                 <option value="Position">Relevance</option>
+                 <option value="Product Name">Neme, A to Z</option>
+                 <option value="Product Name">Neme, Z to A</option>
+                 <option value="Price">Price low to heigh</option>
+                 <option value="Price">Price heigh to low</option>
+               </select>
+             </div>
+           </div>
+           <!-- Toolbar Short Area End -->
+         </div>
+         <!-- Grid & List View End -->
+         <div class="shop-area mb-all-40">
+           <!-- Grid & List Main Area End -->
+           <div class="tab-content">
+             <div id="grid-view" class="tab-pane fade show active">
+               <div class="row border-hover-effect ">
+
+                 <ng-container *ngFor="let item of productsData">
+                   <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                     <!-- Single Product Start Here -->
+                     <div class="single-makal-product">
+                       <div class="pro-img" style="cursor: pointer;">
+                         <a (click)="productsDetails(item.data.name, item.data._id, item.data.subsubcategories)">
+                           <img src="{{baseURL}}/retrieve/{{item.data.media[0].url}}"
+                             alt="product-img">
+                         </a>
+                         <span class="sticker-new">new</span>
+                       </div>
+                       <div class="pro-content">
+                         <h4 class="pro-title">
+                           <a (click)="productsDetails(item.data.name, item.data._id, item.data.subsubcategories)">{{item.data.name}}</a>
+                         </h4>
+                         <p>
+                           <span class="price">₹{{item.data.price}}</span>
+                         </p>
+                         <div class="pro-actions">
+                           <div class="actions-primary">
+                             <a (click)="addProducts(item.data, 1)" class="add-to-cart" data-toggle="tooltip"
+                               data-original-title="Add to Cart" style="cursor: pointer;">Add To Cart</a>
+                           </div>
+                           <div class="actions-secondary">
+                             <div class="rating">
+                              <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 1"></i>
+                              <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 2"></i>
+                              <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 3"></i>
+                              <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 4"></i>
+                              <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 5"></i>
+                
+                              <i class="fa fa-star-o" *ngIf="item.rating < 1"></i>
+                              <i class="fa fa-star-o" *ngIf="item.rating < 2"></i>
+                              <i class="fa fa-star-o" *ngIf="item.rating < 3"></i>
+                              <i class="fa fa-star-o" *ngIf="item.rating < 4"></i>
+                              <i class="fa fa-star-o" *ngIf="item.rating < 5"></i>
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                     <!-- Single Product End Here -->
+                   </div>
+                 </ng-container>
+              </div>
+               <!-- Row End -->
+             </div>
+             <!-- #grid view End -->
+             <div id="list-view" class="tab-pane fade fix">
+                <ng-container *ngFor="let item of productsData">
+                    <div class="single-makal-product" style="cursor: pointer">
+                        <div class="pro-img" style="cursor: pointer">
+                        <a (click)="productsDetails(item.data.name, item.data._id, item.data.subsubcategories)"><img src="{{baseURL}}/retrieve/{{item.data.media[0].url}}"
+                            alt="product-img"></a>
+                        <span class="sticker-new">new</span>
+                        </div>
+                        <div class="pro-content">
+                        <h4 class="pro-title"><a (click)="productsDetails(item.data.name, item.data._id, item.data.subsubcategories)">{{item.data.name}}</a>
+                        </h4>
+                        <div class="rating">
+                          <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 1"></i>
+                          <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 2"></i>
+                          <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 3"></i>
+                          <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 4"></i>
+                          <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 5"></i>
+            
+                          <i class="fa fa-star-o" *ngIf="item.rating < 1"></i>
+                          <i class="fa fa-star-o" *ngIf="item.rating < 2"></i>
+                          <i class="fa fa-star-o" *ngIf="item.rating < 3"></i>
+                          <i class="fa fa-star-o" *ngIf="item.rating < 4"></i>
+                          <i class="fa fa-star-o" *ngIf="item.rating < 5"></i>
+                        </div>
+                        <p><span class="price">₹{{item.data.price}}</span>
+                        </p>
+                        <p [innerHTML]="item.singleSesc"></p>
+                        </div>
+                    </div>
+                </ng-container>  
+             </div>
+             <!-- #list view End -->
+           </div>
+           <!-- Grid & List Main Area End -->
+         </div>
+       </div>
+       <!-- product Categorie List End -->
+     </div>
+     <!-- Row End -->
+   </div>
+   <!-- Container End -->
+ </div>
+ <!-- Shop Page End -->

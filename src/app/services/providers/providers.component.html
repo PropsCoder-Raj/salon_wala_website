@@ -1,0 +1,67 @@
+<!-- Breadcrumb Area Start Here -->
+<div class="breadcrumb-area">
+  <h3 class="text-center text-primary" style="text-align: center;">Book Services, On demand</h3>
+</div>
+<!-- Breadcrumb Area End Here -->
+<!-- Wish List Start -->
+<div class="cart-main-area wish-list white-bg pt-20 pb-100">
+  <div class="container ptb-20">
+    <div class="row" style="align-items: center;">
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div>Showing Salons for <a class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Pune
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 col-md-6 col-sm-12">
+        <div class="subscribe-box">
+          <form action="#">
+            <input type="text" placeholder="Search" [(ngModel)]="searchterm" [ngModelOptions]="{standalone: true}">
+            <button type="submit" class="pe-7s-search"></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-12" *ngFor="let item of providers | filter:searchterm;let i = index">
+        <div class="card provider-card" style="width: 100%;" (click)="providersDetails(item.data._id)">
+          <img
+            src="data:image/png;base64,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"
+            width="100%" height="100px">
+          <div class="card-body">
+            <h5 class="shop-title">{{item.data.shopName}}</h5>
+            <p class="card-text">
+              <span class="rating"><i class="fa fa-star"></i>&nbsp; 4.89 &nbsp;&nbsp;<span class="text-muted count">100
+                  ratings</span></span>
+              <br>
+              <span class="timing"><i class="fa fa-clock-o"></i> <span
+                  class="text-muted time">{{item.data.usualTime}}</span></span>
+              <br>
+              <span class="location flex-box">
+                <mat-icon aria-hidden="false" aria-label="Example home icon">place</mat-icon> <span
+                  class="text-muted short-address">{{item.data.shopAddress | spiltPipe}}</span>
+              </span>
+              <span class="services"><span class="text-muted services-text">
+                <span *ngFor="let service of item.services; let i = index">
+                  <span *ngIf="i < 3">
+                    <span>{{service.data.name}}</span>, 
+                  </span>
+                </span>
+              </span></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,128 @@
+.flex-box{
+    display: flex;
+    align-items: center;
+    
+}
+
+.flex-item{
+    flex: 1;
+}
+
+.row>*{
+    padding-right: unset;
+}
+
+.shop-title{
+    font-size: 16px;
+    color: #252525;
+}
+
+.rating{
+    color: green !important;
+    font-size: 14px;
+
+    i{
+        color: green !important;
+        font-size: 14px;
+    }
+
+    .count{
+        font-size: 12px;
+    }
+}
+
+.timing{
+    color: green !important;
+    font-size: 14px;
+
+    i{
+        color: #757575;
+        font-size: large;
+        min-width: 25px;
+    }
+
+    .time{
+        font-size: 13px;
+    }
+}
+
+.location{
+    color: green !important;
+    font-size: 14px;
+
+    mat-icon{
+        color: #757575;
+        font-size: large;
+        min-width: 25px;
+        height: auto;
+    }
+
+    .short-address{
+        font-size: 13px;
+        line-height: 1.5;
+    }
+}
+
+.services{
+    .services-text{
+        font-size: 13px;
+        line-height: 1.5;
+    }
+}
+
+.provider-card{
+    cursor: pointer;
+    border-radius: 15px;
+
+    img{
+        border-radius: 15px 15px 0px 0px;
+    }
+}
+
+
+.subscribe-box{
+    .checkoutButton {
+        background: #c7b270;
+        width: auto;
+        font-size: small;
+        color: white;
+    }
+
+    .checkoutButton:hover{
+        background: #323232;
+        color: white;;
+    }
+
+    button{
+        float: right;
+    }
+
+    input{
+        width: calc(100% - 300px);
+    }
+}
+
+.serviceList{
+    .heading{
+        font-size: small;
+    }
+
+    .service{
+        display: flex;
+        align-items: center;
+        color: green !important;
+        font-size: 14px;
+    
+        mat-icon{
+            color: #757575;
+            font-size: large;
+            min-width: 25px;
+            height: auto;
+        }
+    
+        .short-address{
+            font-size: 13px;
+            line-height: 1.5;
+        }
+    }
+}

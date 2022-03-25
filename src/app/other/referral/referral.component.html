@@ -1,0 +1,28 @@
+
+<div class="skill-area white-bg ptb-90">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="text-center">Refer & Earn</h1>
+            </div>    
+            <div class="col-lg-12 text-center">
+                <img src="assets/referral.jpg" alt="">
+            </div>
+            <div class="col-lg-6" style="padding-top: 20px;">
+                <div class="text-center">
+                    <button class="btnCode">{{code}}</button>
+                </div>
+                <div class="text-center">
+                    <button class="btnCopy" (click)="copyMessage(code)">Copy & Paste</button>
+                </div>
+            </div>
+            <div class="col-lg-6" style="padding-top: 20px;">
+                <ul>
+                    <li>Share referral code with friends</li>
+                    <li>Your friends will get <b>₹ {{referralAmount}}</b> discount on ordered.</li>
+                    <li>You will earn <b>₹ {{referralAmount}}</b> and redeem on ordered.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

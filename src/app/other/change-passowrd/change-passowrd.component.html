@@ -1,0 +1,45 @@
+<!-- Breadcrumb Area Start Here -->
+<div class="breadcrumb-area">
+  <h3 class="text-center text-primary" style="text-align: center;">Change Password</h3>
+</div>
+<!-- Breadcrumb Area End Here -->
+<!-- Wish List Start -->
+<div class="cart-main-area wish-list white-bg ptb-90">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div>
+          <div class="form-group row">
+            <label for="inputpassword" class="col-lg-3 col-md-4 col-form-label">Current password</label>
+            <div class="col-lg-6 col-md-8">
+              <input type="password" class="form-control" id="inputpassword" placeholder="Enter Current Password" [(ngModel)]="password">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="newpassword" class="col-lg-3 col-md-4 col-form-label">New
+              password</label>
+            <div class="col-lg-6 col-md-8">
+              <input *ngIf="!showHideNewPassword" type="password" class="form-control" id="newpassword" placeholder="Enter New Password" [(ngModel)]="newpassword">
+              <input *ngIf="showHideNewPassword" type="text" class="form-control" id="newpassword" placeholder="Enter New Password" [(ngModel)]="newpassword">
+              <button class="btn show-btn" type="button" (click)="showHideNewPassword = !showHideNewPassword">Show</button>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="c-password" class="col-lg-3 col-md-4 col-form-label">Confirm
+              password</label>
+            <div class="col-lg-6 col-md-8">
+              <input *ngIf="!showHideConfirmPassword" type="password" class="form-control" id="c-password" placeholder="Enter Confirm Password" [(ngModel)]="confirmpassword">
+              <input *ngIf="showHideConfirmPassword" type="text" class="form-control" id="c-password" placeholder="Enter Confirm Password" [(ngModel)]="confirmpassword">
+              <button class="btn show-btn" type="button" (click)="showHideConfirmPassword = !showHideConfirmPassword">Show</button>
+            </div>
+          </div>
+          <div class="register-box mt-40">
+            <button type="submit" class="return-customer-btn float-right" (click)="changePassword()">Change Password <i class="fa fa-circle-o-notch fa-spin" *ngIf="loading" aria-hidden="true"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Row End -->
+  </div>
+</div>
+<!-- Wish List End -->

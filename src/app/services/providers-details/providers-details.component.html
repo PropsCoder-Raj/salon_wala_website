@@ -1,0 +1,83 @@
+<div class="breadcrumb-area">
+  <h3 class="text-center text-primary" style="text-align: center;">{{shopName}}</h3>
+</div>
+
+
+<div class="container ptb-20">
+  <div class="row" style="align-items: center;">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+    </div>
+    <div class="col-lg-8 col-md-6 col-sm-12">
+      <div class="subscribe-box">
+        <form action="#">
+          <button *ngIf="serviceCartS.carts.length !== 0" mat-button
+            class="checkoutButton animate__animated animate__flipInX" [routerLink]="['/s/checkout']">Checkout
+            Appointment</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-12" *ngFor="let item of servicesList;let i = index">
+      <div class="card provider-card" style="width: 100%;">
+        <img src="{{baseURL}}/retrieve/{{item.data.media[0].url}}" width="100%" height="100px">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-8 col-sm-8 col-sx-8" style="height: 3.5rem">
+              <h5 class="shop-title" *ngIf="item.data.name.length > 40">
+                {{item.data.name.substr(0, 40)}}...
+              </h5>
+              <h5 class="shop-title" *ngIf="item.data.name.length < 40">
+                {{item.data.name}}
+              </h5>
+            </div>
+            <div class="col-md-4 col-sm-4 col-sx-4 addSection">
+                <button *ngIf="checkIsAvailable(item.data)" id="addBtn{{item.data._id}}" class="add-button" mat-button (click)="addService(item)">Add</button>
+                <mat-icon (click)="deselected(item)" class="animate__animated animate__flipInX" *ngIf="!checkIsAvailable(item.data)" aria-hidden="false" aria-label="Example home icon">check</mat-icon>
+            </div>
+            
+            <div class="col-md-12">
+              <div class="mdc-evolution-chip" role="row" id="c0" style="height: unset;background: white;display: block;">
+                <span class="mdc-evolution-chip__cell mdc-evolution-chip__cell--primary" role="gridcell">
+                  <button class="mdc-evolution-chip__action mdc-evolution-chip__action--primary" type="button" tabindex="0" style="padding: unset;">
+                    <mat-icon style="font-size: large;height: unset;width: unset;font-weight: bold;margin-right: 1px;" aria-hidden="false" aria-label="Example home icon">currency_rupee</mat-icon>
+                    <span class="mdc-evolution-chip__text-label">{{item.service.price}}</span>
+                  </button>
+                </span>
+              </div>
+              <div class="mdc-evolution-chip" role="row" id="c0" style="height: unset;background: white;display: block;margin-top: 10px;">
+                <span class="mdc-evolution-chip__cell mdc-evolution-chip__cell--primary" role="gridcell">
+                  <button class="mdc-evolution-chip__action mdc-evolution-chip__action--primary" type="button" tabindex="0" style="padding: unset;">
+                    <mat-icon style="font-size: large;height: unset;width: unset;font-weight: bold;margin-right: 5px;" aria-hidden="false" aria-label="Example home icon">schedule</mat-icon>
+                    <span class="mdc-evolution-chip__text-label">{{item.service.time}} min</span>
+                  </button>
+                </span>
+              </div>
+              <div class="services">
+                <div class="text-muted services-text" [style.height]="item.data.description.length <= 116 ? '6.9rem' : 'auto'">
+                  <ng-container *ngIf="!item.hideShowStatus">
+                    <div [innerHTML]="item.data.description.substr(0,116)"></div>
+                    <button class="viewDetails" mat-button *ngIf="item.data.description.length > 116" (click)="item.hideShowStatus = !item.hideShowStatus">
+                      View Details
+                      <mat-icon aria-hidden="false" aria-label="Example home icon">expand_more</mat-icon>
+                    </button>
+                  </ng-container>
+                  <ng-container *ngIf="item.hideShowStatus">
+                    <div [innerHTML]="item.data.description"></div>
+                    <button class="viewDetails" mat-button (click)="item.hideShowStatus = !item.hideShowStatus">
+                      Hide Details
+                      <mat-icon aria-hidden="false" aria-label="Example home icon">expand_less</mat-icon>
+                    </button>
+                  </ng-container>  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

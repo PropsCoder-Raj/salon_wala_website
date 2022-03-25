@@ -1,0 +1,107 @@
+<!-- Breadcrumb Area Start Here -->
+<div class="breadcrumb-area">
+    <h3 class="text-center text-primary" style="text-align: center;">Booking</h3>
+  </div>
+  <!-- Breadcrumb Area End Here -->
+  <!-- Wish List Start -->
+  <div class="cart-main-area wish-list white-bg ptb-90">
+  
+    <div class="container" *ngIf="bookingsCount === 0">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="text-center">
+            <img src="assets/appointment.png" style="height: 20rem;width: 20rem;" alt="">
+          </div>
+          <div class="text-center" style="margin-top: 30px;">
+            <b style="font-size: x-large;">No Bookings available</b>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+  <div class="container" *ngIf="bookingsCount > 0">
+    <div class="row">
+      <ng-container *ngFor="let item of bookingsList; let i = index">
+        <div class="col-md-12 col-sm-12 col-xs-12 mtb-20">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-header p-10" style="border-radius: 15px 15px 0px 0px;">
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="row">
+                    <div class="mtb-10 col-xs-6 col-sm-6 col-md-2 col-lg-3">
+                      <p style="text-transform: uppercase;color: darkgray;">Booking Date</p>
+                      <h6 style="text-transform: capitalize;">{{item.data.bookingDate | date : 'dd MMMM yyyy'}}
+                      </h6>
+                    </div>
+                    <div class="mtb-10 col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                      <p style="text-transform: uppercase;color: darkgray;">Day</p>
+                      <h6 style="text-transform: capitalize;">{{item.data.slot.day}}</h6>
+                    </div>
+                    <div class="mtb-10 col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                      <p style="text-transform: uppercase;color: darkgray;">Slot Timing</p>
+                      <h6 style="text-transform: capitalize;">{{item.data.slot.start}} - {{item.data.slot.end}}</h6>
+                    </div>
+                    <div class="mtb-10 col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                      <p style="text-transform: uppercase;color: darkgray;">Shop Name</p>
+                      <h6 style="text-transform: capitalize;">{{item.user.shopName}}</h6>
+                    </div>
+                    <div class="mtb-10 col-xs-6 col-sm-6 col-md-1 col-lg-1">
+                      <p style="text-transform: uppercase;color: darkgray;">Total</p>
+                      <h6 style="text-transform: capitalize;white-space: nowrap;">₹ {{item.data.bookingTotal}}</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12 col-md-12">
+                  <div class="row">
+                    <ng-container *ngFor="let services of item.data.services">
+                      <div class="col-lg-6 col-md-6">
+                        <div class="row mtb-10">
+                            <div class="col-lg-5">
+                                <a><img src="{{baseURL}}/retrieve/{{services.media[0].url}}" style="height: 200px;width: 100%;" alt="services-img"></a>
+                            </div>
+                            <div class="col-lg-7">
+                                <div>
+                                  <div style="margin-bottom: unset;" class="pro-title"><a style="white-space: pre-wrap;font-size: medium;font-weight: bold;">{{services.name}}</a></div>
+                                  <!-- <p><span class="price">₹{{services.price}}</span></p>
+                                  <p><span class="price">{{services.time}} min</span></p> -->
+                                  <div class="mdc-evolution-chip" role="row" id="c0" style="height: unset;background: white;display: block;margin-top: 20px;">
+                                    <span class="mdc-evolution-chip__cell mdc-evolution-chip__cell--primary" role="gridcell">
+                                      <button class="mdc-evolution-chip__action mdc-evolution-chip__action--primary" type="button" tabindex="0" style="padding: unset;">
+                                        <mat-icon style="font-size: large;height: unset;width: unset;font-weight: bold;margin-right: 8px;" aria-hidden="false" aria-label="Example home icon">currency_rupee</mat-icon>
+                                        <span class="mdc-evolution-chip__text-label">{{services.price}}</span>
+                                      </button>
+                                    </span>
+                                  </div>
+                                  <div class="mdc-evolution-chip" role="row" id="c0" style="height: unset;background: white;display: block;margin-top: 5px;">
+                                    <span class="mdc-evolution-chip__cell mdc-evolution-chip__cell--primary" role="gridcell">
+                                      <button class="mdc-evolution-chip__action mdc-evolution-chip__action--primary" type="button" tabindex="0" style="padding: unset;">
+                                        <mat-icon style="font-size: large;height: unset;width: unset;font-weight: bold;margin-right: 8px;" aria-hidden="false" aria-label="Example home icon">schedule</mat-icon>
+                                        <span class="mdc-evolution-chip__text-label">{{services.time}} min</span>
+                                      </button>
+                                    </span>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <!-- Row End -->
+  </div>
+  
+  </div>
+  <!-- Wish List End -->
+  

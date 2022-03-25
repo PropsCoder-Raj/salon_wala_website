@@ -1,0 +1,20 @@
+.carousel-control{
+    opacity: 0.2;
+}
+.carousel-control:hover{
+    opacity: 0.8;
+}
+.icon-prev{
+    position: absolute;
+    left: 0;
+    top: 45%;
+}
+.icon-next{
+    position: absolute;
+    right: 0;
+    top: 45%;
+}
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+}

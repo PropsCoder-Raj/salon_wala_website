@@ -1,0 +1,276 @@
+
+   <!-- Slider Area Start -->
+   <ngb-carousel [showNavigationArrows]="true" [showNavigationIndicators]="true" [keyboard]="true" [wrap]="true">
+     <ng-template ngbSlide *ngFor="let item of topSliderMedia;let i = index;">
+       <div class="owl-item " style="width: 100%;">
+         <div class="slide" [routerLink]="item.link" style="cursor: pointer;">
+           <img src="{{baseURL}}/retrieve/{{item.url}}">
+         </div>
+       </div>
+     </ng-template>
+   </ngb-carousel>
+   <!-- Slider Area End -->
+   <!--  Top Banner Area Start -->
+   <div class="banner-area pt-20 pb-90">
+     <div class="container">
+       <div class="row">
+         <!--  Single Banner Area Start -->
+         <div class="col-lg-4 col-md-4 mb-sm-30" *ngFor="let item of belowSliderOffer;let i = index">
+           <div class="single-banner zoom" [routerLink]="item.link" style="cursor: pointer;">
+              <img src="{{baseURL}}/retrieve/{{item.url}}">
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <div class="new-arrival no-border-style ptb-30">
+     <div class="container">
+       <!-- Section Title Start -->
+       <div class="section-title text-center">
+         <h2>our feature products</h2>
+         <p>Add our new arrivals to your weekly lineup</p>
+       </div>
+       <!-- Section Title End -->
+       <div class="container" style="padding:unset;">
+         <div class="row" style="margin-bottom:20px">
+          <ng-container *ngFor="let item of featuredProducts">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
+              <!-- Single Product Start Here -->
+              <div class="single-makal-product">
+                <div class="pro-img">
+                  <a (click)="productsDetails(item.data.name, item.data._id, item.data.subsubcategories)">
+                    <img src="{{baseURL}}/retrieve/{{item.data.media[0].url}}"
+                      alt="product-img">
+                  </a>
+                  <span class="sticker-new">new</span>
+                  <div class="quick-view-pro">
+                    <a data-bs-toggle="modal" data-bs-target="#product-window" class="quick-view" href="#"></a>
+                  </div>
+                </div>
+                <div class="pro-content">
+                  <h4 class="pro-title">
+                    <a (click)="productsDetails(item.data.name, item.data._id, item.data.subsubcategories)">{{item.data.name}}</a>
+                  </h4>
+                  <p>
+                    <span class="price">₹{{item.data.price}}</span>
+                  </p>
+                  <div class="pro-actions">
+                    <div class="actions-primary">
+                      <a (click)="addProducts(item.data, 1)" style="cursor: pointer;" class="add-to-cart" data-toggle="tooltip"
+                        data-original-title="Add to Cart">Add To Cart</a>
+                    </div>
+                    <div class="actions-secondary">
+                      <div class="rating">
+
+                        <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 1"></i>
+                        <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 2"></i>
+                        <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 3"></i>
+                        <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 4"></i>
+                        <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 5"></i>
+          
+                        <i class="fa fa-star-o" *ngIf="item.rating < 1"></i>
+                        <i class="fa fa-star-o" *ngIf="item.rating < 2"></i>
+                        <i class="fa fa-star-o" *ngIf="item.rating < 3"></i>
+                        <i class="fa fa-star-o" *ngIf="item.rating < 4"></i>
+                        <i class="fa fa-star-o" *ngIf="item.rating < 5"></i>
+
+                        <!-- <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Single Product End Here -->
+            </div>
+          </ng-container>
+         </div>
+       </div>
+     </div>
+   </div>
+   <!-- New Arrival Products End Here -->
+   <!-- New Product Banner Start Here -->
+   <div class="product-bannner pro-border-style">
+     <div class="container-fluid">
+       <div class="row">
+         <div class="col-md-6 mb-sm-30" *ngFor="let item of belowFeaturedProduct;let i = index;">
+           <div class="single-banner" [routerLink]="item.link" style="cursor: pointer;">
+              <img src="{{baseURL}}/retrieve/{{item.url}}" alt="banner-img">
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <div class="brand-area pt-90 ptb-90">
+     <div class="container">
+       <drag-scroll style="position: relative;" #dra [scrollbar-hidden]="true">
+          <div drag-scroll-item class="single-brand" style="margin: 0px 35px;" *ngFor="let item of brands;let i = index;">
+            <a [routerLink]="item.link"><img src="{{baseURL}}/retrieve/{{item.url}}"></a>
+          </div>
+         <a class="left carousel-control" role="button" (click)="moveLeft()">
+           <i class="fa fa-chevron-left icon-prev" aria-hidden="true"></i>
+         </a>
+         <a class="right carousel-control" role="button" (click)="moveRight()">
+           <i class="fa fa-chevron-right icon-next" aria-hidden="true"></i>
+         </a>
+       </drag-scroll>
+     </div>
+   </div>
+   <!-- Brand Activation End Here -->
+   <!-- Categorie Slider Area Start Here -->
+   <!-- <div class="categories-of-pro ptb-90">
+     <div class="container-fluid">
+        <drag-scroll #cat [scrollbar-hidden]="true" style="height: 100%;position: relative !important;">
+            <div drag-scroll-item class="single-categorie" style="margin: 0px 20px; width: 300px;">
+                <div class="cat-img">
+                  <a href="#">
+                    <img src="assets/img/categoires-pro/c5.webp" alt="cat-pro">
+                  </a>
+                  <div class="cat-content">
+                    <a href="#">Earrings</a>
+                  </div>
+                </div>
+              </div>
+              <div drag-scroll-item class="single-categorie" style="margin: 0px 20px;width: 300px;">
+                <div class="cat-img">
+                  <a href="#">
+                    <img src="assets/img/categoires-pro/c1.webp" alt="cat-pro">
+                  </a>
+                  <div class="cat-content">
+                    <a href="#">Necklaces</a>
+                  </div>
+                </div>
+              </div>
+              <div drag-scroll-item class="single-categorie" style="margin: 0px 20px;width: 300px;">
+                <div class="cat-img">
+                  <a href="#">
+                    <img src="assets/img/categoires-pro/c2.webp" alt="cat-pro">
+                  </a>
+                  <div class="cat-content">
+                    <a href="#">Bracelets</a>
+                  </div>
+                </div>
+              </div>
+              <div drag-scroll-item class="single-categorie" style="margin: 0px 20px;width: 300px;">
+                <div class="cat-img">
+                  <a href="#">
+                    <img src="assets/img/categoires-pro/c3.webp" alt="cat-pro">
+                  </a>
+                  <div class="cat-content">
+                    <a href="#">Portfolio</a>
+                  </div>
+                </div>
+              </div>
+              <div drag-scroll-item class="single-categorie" style="margin: 0px 20px;width: 300px;">
+                <div class="cat-img">
+                  <a href="#">
+                    <img src="assets/img/categoires-pro/c4.webp" alt="cat-pro">
+                  </a>
+                  <div class="cat-content">
+                    <a href="#">Necklaces</a>
+                  </div>
+                </div>
+              </div>
+              <a class="left carousel-control" role="button" (click)="moveLeft1()">
+                <i class="fa fa-chevron-left icon-prev" aria-hidden="true"></i>
+              </a>
+              <a class="right carousel-control" role="button" (click)="moveRight1()">
+                <i class="fa fa-chevron-right icon-next" aria-hidden="true"></i>
+              </a>
+        </drag-scroll>
+       <div class="categorie-pro-active owl-carousel">
+         <div class="single-categorie">
+           <div class="cat-img">
+             <a href="#">
+               <img src="assets/img/categoires-pro/c1.webp" alt="cat-pro">
+             </a>
+             <div class="cat-content">
+               <a href="#">Necklaces</a>
+             </div>
+           </div>
+         </div>
+         <div class="single-categorie">
+           <div class="cat-img">
+             <a href="#">
+               <img src="assets/img/categoires-pro/c2.webp" alt="cat-pro">
+             </a>
+             <div class="cat-content">
+               <a href="#">Bracelets</a>
+             </div>
+           </div>
+         </div>
+         <div class="single-categorie">
+           <div class="cat-img">
+             <a href="#">
+               <img src="assets/img/categoires-pro/c3.webp" alt="cat-pro">
+             </a>
+             <div class="cat-content">
+               <a href="#">Portfolio</a>
+             </div>
+           </div>
+         </div>
+         <div class="single-categorie">
+           <div class="cat-img">
+             <a href="#">
+               <img src="assets/img/categoires-pro/c4.webp" alt="cat-pro">
+             </a>
+             <div class="cat-content">
+               <a href="#">Necklaces</a>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div> -->
+   <!-- Categorie Slider Area End Here -->
+   <!-- Support Area Start Here -->
+   <div class="support-area pb-90">
+     <div class="container">
+       <div class="row">
+         <div class="col-lg-3 col-md-6 col-sm-6 mb-all-30">
+           <div class="single-support">
+             <div class="pe-7s-plane icon"></div>
+             <div class="support-desc">
+               <h6>Free Shipping</h6>
+               <span>Free shipping on all US order or order above $200</span>
+             </div>
+           </div>
+         </div>
+         <div class="col-lg-3 col-md-6 col-sm-6 mb-all-30">
+           <div class="single-support">
+             <div class="pe-7s-help2 icon"></div>
+             <div class="support-desc">
+               <h6>Support 24/7</h6>
+               <span>Contact us 24 hours a day, 7 days a week</span>
+             </div>
+           </div>
+         </div>
+         <div class="col-lg-3 col-md-6 col-sm-6 mb-xsm-30">
+           <div class="single-support">
+             <div class="pe-7s-back icon"></div>
+             <div class="support-desc">
+               <h6>30 Days Return</h6>
+               <span>Simply return it within 30 days for an exchange</span>
+             </div>
+           </div>
+         </div>
+         <div class="col-lg-3 col-md-6 col-sm-6">
+           <div class="single-support">
+             <div class="pe-7s-credit icon"></div>
+             <div class="support-desc">
+               <h6>100% Payment Secure</h6>
+               <span>We ensure secure payment with PEV</span>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <!-- Container End -->
+   </div>
+   <!-- Support Area End Here -->
+  

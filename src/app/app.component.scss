@@ -1,0 +1,104 @@
+.book-an-apt {
+  background: #c7b270;
+  padding-left: 5px;
+  padding-right: 5px;
+
+  a {
+    color: #fff !important;
+  }
+}
+
+#snackbarSuccess {
+  border-radius: 15px !important;
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-image: linear-gradient(to right, #11998e, #38ef7d);;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 10px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+#snackbarSuccess.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#snackbarError {
+  border-radius: 15px !important;
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background: linear-gradient(to right, #e52d27, #b31217);
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 10px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 12px;
+}
+
+#snackbarError.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}

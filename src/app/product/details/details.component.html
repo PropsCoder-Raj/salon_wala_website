@@ -1,0 +1,341 @@
+<!-- Breadcrumb Area Start Here -->
+<div class="breadcrumb-area">
+  <div class="container">
+
+  </div>
+</div>
+<!-- Breadcrumb Area End Here -->
+<!-- Product Thumbnail Start -->
+<div class="main-product-thumbnail white-bg ptb-90">
+  <div class="container">
+    <div class="row">
+      <!-- Main Thumbnail Image Start -->
+      <div class="col-lg-4 col-md-6 mb-all-40">
+        <!-- Thumbnail Large Image start -->
+        <div class="tab-content">
+
+          <ng-container *ngFor="let photo of productsDetails.media; let i = index">
+            <div id="thumb{{i + 1}}" class="tab-pane fade show active" *ngIf="i === 0">
+              <a data-fancybox="images" href="{{baseURL}}/retrieve/{{image}}" target="_blank"><img
+                  src="{{baseURL}}/retrieve/{{image}}" alt="product-view"></a>
+            </div>
+            <!-- <div id="thumb{{i + 1}}" class="tab-pane fade" *ngIf="i !== 0">
+                            <a data-fancybox="images" href="{{baseURL}}/retrieve/{{photo.url}}"><img src="{{baseURL}}/retrieve/{{photo.url}}" alt="product-view"></a>
+                        </div> -->
+          </ng-container>
+
+          <!-- <div id="thumb1" class="tab-pane fade show active">
+                        <a data-fancybox="images" href="assets/img/products/cosmetic/1.webp"><img src="assets/img/products/cosmetic/1.webp" alt="product-view"></a>
+                    </div>
+                    <div id="thumb2" class="tab-pane fade">
+                        <a data-fancybox="images" href="assets/img/products/cosmetic/2.webp"><img src="assets/img/products/cosmetic/2.webp" alt="product-view"></a>
+                    </div> -->
+        </div>
+        <div class="product-thumbnail">
+          <drag-scroll #dra [scrollbar-hidden]="true" style="height: 100%;position: relative !important;">
+
+            <ng-container *ngFor="let photo of productsDetails.media; let i = index">
+              <a drag-scroll-item data-bs-toggle="tab" (click)="setImage(photo.url)" style="cursor: pointer;"><img
+                  src="{{baseURL}}/retrieve/{{photo.url}}" style="width: 116px !important; margin-right:10px;"
+                  alt="product-thumbnail"></a>
+            </ng-container>
+            <!-- <a drag-scroll-item class="active"  data-bs-toggle="tab" href="#thumb1"><img src="assets/img/products/cosmetic/1.webp" style="width: 116px !important; margin-right:10px;" alt="product-thumbnail"></a>
+                        <a drag-scroll-item data-bs-toggle="tab" href="#thumb2"><img src="assets/img/products/cosmetic/2.webp" style="width: 116px !important; margin-right:10px;" alt="product-thumbnail"></a>
+                        <a drag-scroll-item data-bs-toggle="tab" href="#thumb3"><img src="assets/img/products/cosmetic/3.webp" style="width: 116px !important; margin-right:10px;" alt="product-thumbnail"></a>
+                        <a drag-scroll-item data-bs-toggle="tab" href="#thumb4"><img src="assets/img/products/cosmetic/4.webp" style="width: 116px !important; margin-right:10px;" alt="product-thumbnail"></a> -->
+            <a class="left carousel-control" role="button" (click)="moveLeft()">
+              <i class="fa fa-chevron-left icon-prev" aria-hidden="true"></i>
+            </a>
+            <a class="right carousel-control" role="button" (click)="moveRight()">
+              <i class="fa fa-chevron-right icon-next" aria-hidden="true"></i>
+            </a>
+          </drag-scroll>
+
+        </div>
+        <!-- Thumbnail image end -->
+      </div>
+      <!-- Main Thumbnail Image End -->
+      <!-- Thumbnail Description Start -->
+      <div class="col-lg-8 col-md-6">
+        <div class="thubnail-desc fix">
+          <h3 class="product-header">{{productsDetails.name}}</h3>
+          <ul class="rating-summary">
+            <li class="rating-pro">
+              <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="ratingProducts >= 1"></i>
+              <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="ratingProducts >= 2"></i>
+              <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="ratingProducts >= 3"></i>
+              <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="ratingProducts >= 4"></i>
+              <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="ratingProducts >= 5"></i>
+
+              <i class="fa fa-star-o" *ngIf="ratingProducts < 1"></i>
+              <i class="fa fa-star-o" *ngIf="ratingProducts < 2"></i>
+              <i class="fa fa-star-o" *ngIf="ratingProducts < 3"></i>
+              <i class="fa fa-star-o" *ngIf="ratingProducts < 4"></i>
+              <i class="fa fa-star-o" *ngIf="ratingProducts < 5"></i>
+            </li>
+            <li>
+              <p>({{ratingCount}} ratings) &nbsp;&nbsp; <b>{{productsDetails.model}}</b></p>
+            </li>
+          </ul>
+          <div class="pro-thumb-price mt-10">
+            <p class="d-flex align-items-center">
+              <span class="price">₹{{productsDetails.price}}</span>
+              <!-- <span class="prev-price">16.51</span>
+                            <span class="price">$15.19</span>
+                            <span class="saving-price">-5%</span> -->
+            </p>
+          </div>
+          <div>
+          </div>
+          <div class="quatity-stock mt-20">
+            <label>Quantity</label>
+            <ul class="d-flex flex-wrap  align-items-center">
+              <li class="box-quantity">
+                <form action="#">
+                  <input class="quantity" type="number" min="1" value="1" [(ngModel)]="count"
+                    [ngModelOptions]="{standalone: true}">
+                </form>
+              </li>
+              <li>
+                <button class="pro-cart" (click)="addCart(productsDetails)">add to cart</button>
+              </li>
+              <li>
+                <button class="pro-cart" (click)="addWishlist()">add to wishlist</button>
+              </li>
+            </ul>
+          </div>
+          <div id="dtail" class="tab-pane mt-20">
+            <h5 class="mtb-30">Product Details</h5>
+            <p [innerHTML]="productsDetails.description"></p>
+          </div>
+          <div class="social-sharing mt-30">
+            <ul>
+              <li><label>share</label></li>
+              <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+              <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+              <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+              <li><a href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Thumbnail Description End -->
+    </div>
+    <!-- Row End -->
+  </div>
+  <!-- Container End -->
+</div>
+<!-- Product Thumbnail End -->
+<!-- Product Thumbnail Description Start -->
+<div class="thumnail-desc" *ngIf="ratingApplyStatus">
+  <div class="container">
+    <div class="thumb-desc-inner">
+      <div class="row">
+        <div class="col-sm-12">
+          <ul class="main-thumb-desc nav tabs-area" role="tablist">
+            <!-- <li><a class="active" data-bs-toggle="tab" href="#dtail">Products Details</a></li> -->
+            <li><a class="active" data-bs-toggle="tab" href="#review">Reviews</a></li>
+          </ul>
+          <!-- Product Thumbnail Tab Content Start -->
+          <div class="tab-content thumb-content">
+            <!-- <div id="dtail" class="tab-pane fade show active"> <p [innerHTML]="productsDetails.description"></p> </div> -->
+            <div id="review" class="tab-pane fade show active">
+              <!-- Reviews Start -->
+              <!-- <div class="review">
+                                <div class="group-title">
+                                    <h2>customer review</h2>
+                                </div>
+                                <h4 class="review-mini-title">makali</h4>
+                                <ul class="review-list">
+                                    <li>
+                                        <span>Quality</span>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <label>makali</label>
+                                    </li>
+                                    <li>
+                                        <span>price</span>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <label>Review by <a href="https://themeforest.net/user/makali">makali</a></label>
+                                    </li>
+                                    <li>
+                                        <span>value</span>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <label>Posted on 12/20/18</label>
+                                    </li>
+                                </ul>
+                            </div> -->
+              <!-- Reviews End -->
+              <!-- Reviews Start -->
+              <div class="review mt-10">
+                <p class="review-mini-title">your rating</p>
+                <!-- Reviews Field Start -->
+                <div class="riview-field mt-40">
+                  <form autocomplete="off" action="#">
+                    <div class="mtb-20">
+                      <div>
+                        <label class="req" for="comments">Your Rating</label>
+                      </div>
+                      <div>
+                        <i style="font-size: 24px;color: #c7b270 ;" class="fa fa-star" *ngIf="rating >= 1"
+                          (click)="rating = 1; change()"></i>
+                        <i style="font-size: 24px;color: #c7b270 ;" class="fa fa-star" *ngIf="rating >= 2"
+                          (click)="rating = 2; change()"></i>
+                        <i style="font-size: 24px;color: #c7b270 ;" class="fa fa-star" *ngIf="rating >= 3"
+                          (click)="rating = 3; change()"></i>
+                        <i style="font-size: 24px;color: #c7b270 ;" class="fa fa-star" *ngIf="rating >= 4"
+                          (click)="rating = 4; change()"></i>
+                        <i style="font-size: 24px;color: #c7b270 ;" class="fa fa-star" *ngIf="rating >= 5"
+                          (click)="rating = 5; change()"></i>
+
+                        <i style="font-size: 24px;" class="fa fa-star-o" *ngIf="rating < 1"
+                          (click)="rating = 1; change()"></i>
+                        <i style="font-size: 24px;" class="fa fa-star-o" *ngIf="rating < 2"
+                          (click)="rating = 2; change()"></i>
+                        <i style="font-size: 24px;" class="fa fa-star-o" *ngIf="rating < 3"
+                          (click)="rating = 3; change()"></i>
+                        <i style="font-size: 24px;" class="fa fa-star-o" *ngIf="rating < 4"
+                          (click)="rating = 4; change()"></i>
+                        <i style="font-size: 24px;" class="fa fa-star-o" *ngIf="rating < 5"
+                          (click)="rating = 5; change()"></i>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="req" for="comments">Your Review</label>
+                      <textarea class="form-control" rows="5" id="comments" required="required" [(ngModel)]="review"
+                        [ngModelOptions]="{standalone: true}"></textarea>
+                    </div>
+                    <button type="submit" class="customer-btn" (click)="addRatings()">Submit</button>
+                  </form>
+                </div>
+                <!-- Reviews Field Start -->
+              </div>
+              <!-- Reviews End -->
+            </div>
+          </div>
+          <!-- Product Thumbnail Tab Content End -->
+        </div>
+      </div>
+      <!-- Row End -->
+    </div>
+  </div>
+  <!-- Container End -->
+</div>
+<!-- Product Thumbnail Description End -->
+<!-- New Arrival Products Start Here -->
+<div class="new-arrival no-border-style ptb-90">
+  <div class="container">
+    <!-- Section Title Start -->
+    <div class="section-title text-center">
+      <h2>Related Products</h2>
+      <p>Add our new arrivals to your weekly lineup</p>
+    </div>
+    <drag-scroll #cat [scrollbar-hidden]="true" style="height: 100%;position: relative !important;">
+      <!-- <ng-container *ngFor="let item of productsData">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+          <div class="single-makal-product">
+            <div class="pro-img">
+              <a (click)="productsDetails(item.data.name, item.data._id)">
+                <img src="{{baseURL}}/retrieve/{{item.data.media[0].url}}" alt="product-img">
+              </a>
+              <span class="sticker-new">new</span>
+              <div class="quick-view-pro">
+                <a data-bs-toggle="modal" data-bs-target="#product-window" class="quick-view" href="#"></a>
+              </div>
+            </div>
+            <div class="pro-content">
+              <h4 class="pro-title">
+                <a (click)="productsDetails(item.data.name, item.data._id)">{{item.data.name}}</a>
+              </h4>
+              <p>
+                <span class="price">₹{{item.data.price}}</span>
+              </p>
+              <div class="pro-actions">
+                <div class="actions-primary">
+                  <a (click)="addProducts(item.data, 1)" class="add-to-cart" data-toggle="tooltip"
+                    data-original-title="Add to Cart" style="cursor: pointer;">Add To Cart</a>
+                </div>
+                <div class="actions-secondary">
+                  <div class="rating">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container> -->
+      <ng-container *ngFor="let item of relatedProducts">
+        <div drag-scroll-item class="single-makal-product" style="width: 277px !important; margin-right: 20px;">
+            <div class="pro-img">
+                <a (click)="productsD(item.data.name, item.data._id, item.data.subsubcategories)">
+                <img src="{{baseURL}}/retrieve/{{item.data.media[0].url}}" alt="product-img">
+                </a>
+                <span class="sticker-new">new</span>
+                <div class="quick-view-pro">
+                <a data-bs-toggle="modal" data-bs-target="#product-window" class="quick-view" href="#"></a>
+                </div>
+            </div>
+            <div class="pro-content">
+                <h4 class="pro-title">
+                <a (click)="productsD(item.data.name, item.data._id, item.data.subsubcategories)">{{item.data.name}}</a>
+                </h4>
+                <p>
+                <span class="price">₹{{item.data.price}}</span>
+                </p>
+                <div class="pro-actions">
+                <div class="actions-primary">
+                    <a style="cursor: pointer;" (click)="addProducts(item.data, 1)" class="add-to-cart" data-toggle="tooltip"
+                    data-original-title="Add to Cart">Add To Cart</a>
+                </div>
+                <div class="actions-secondary">
+                    <div class="rating">
+                        <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 1"></i>
+                        <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 2"></i>
+                        <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 3"></i>
+                        <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 4"></i>
+                        <i style="color: #c7b270 ;" class="fa fa-star" *ngIf="item.rating >= 5"></i>
+          
+                        <i class="fa fa-star-o" *ngIf="item.rating < 1"></i>
+                        <i class="fa fa-star-o" *ngIf="item.rating < 2"></i>
+                        <i class="fa fa-star-o" *ngIf="item.rating < 3"></i>
+                        <i class="fa fa-star-o" *ngIf="item.rating < 4"></i>
+                        <i class="fa fa-star-o" *ngIf="item.rating < 5"></i>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+      </ng-container>  
+      <a class="left carousel-control" role="button" (click)="moveLeft1()">
+        <i class="fa fa-chevron-left icon-prev" style="top: 40% !important;" aria-hidden="true"></i>
+      </a>
+      <a class="right carousel-control" role="button" (click)="moveRight1()">
+        <i class="fa fa-chevron-right icon-next" style="top: 40% !important;" aria-hidden="true"></i>
+      </a>
+    </drag-scroll>
+    <!-- Section Title End -->
+    <div class="our-pro-active owl-carousel">
+      <!-- Single Product Start Here -->
+
+      <!-- Single Product End Here -->
+
+    </div>
+  </div>
+</div>
+<!-- New Arrival Products End Here -->

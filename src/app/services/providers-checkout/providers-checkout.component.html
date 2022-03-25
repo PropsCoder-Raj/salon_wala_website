@@ -1,0 +1,208 @@
+ <!-- Breadcrumb Area Start Here -->
+ <div class="breadcrumb-area">
+   <div class="container">
+     <ol class="breadcrumb breadcrumb-list">
+       <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+       <li class="breadcrumb-item active">Checkout Appointment</li>
+     </ol>
+   </div>
+ </div>
+
+ <div id="closeForm" (click)="loading = !loading"></div>
+ <!-- Breadcrumb Area End Here -->
+ <!-- coupon-area start -->
+ <div class="coupon-area white-bg pt-90 pb-30">
+   <div class="container">
+     <div class="row">
+       <div class="col-md-12">
+         <div class="coupon-accordion">
+           <!-- Accordion Start -->
+           <h3>Have a coupon? <span (click)="showCoupon()">Click here to enter your code</span></h3>
+           <div id="checkout_coupon" class="coupon-checkout-content">
+             <div class="coupon-info">
+               <form action="#">
+                 <p class="checkout-coupon">
+                   <input type="text" class="code" placeholder="Coupon code" [(ngModel)]="couponCode"
+                     [ngModelOptions]="{standalone: true}" />
+                   <input type="submit" (click)="applyCopon()" value="Apply Coupon" />
+                 </p>
+               </form>
+             </div>
+           </div>
+           <!-- ACCORDION END -->
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+
+ <div class="checkout-area white-bg pb-90">
+   <div class="container">
+     <div class="row">
+       <div class="col-lg-6 col-md-6">
+         <br>
+         <h3>Service List</h3>
+         <br><br>
+         <ng-container *ngFor="let item of serviceCarts.carts">
+           <div class="card">
+             <div class="card-body">
+               <div class="row">
+                 <div class="col-md-10">
+                   <h6 style="text-transform: capitalize;font-weight: bold;">{{item.data.name}}</h6>
+                   <p>₹ {{item.service.price}} for {{item.service.time}} min</p>
+                 </div>
+                 <div class="col-md-2">
+                   <button mat-button (click)="serviceCarts.removeCarts(item)">
+                     <mat-icon aria-hidden="false" aria-label="Example home icon">close</mat-icon>
+                   </button>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </ng-container>
+       </div>
+       <div class="col-lg-6 col-md-6">
+         <div class="your-order">
+           <h3>Your Appointment</h3>
+           <div class="row">
+             <div class="col-md-12">
+               <div class="card">
+                 <div class="card-body">
+                   <div class="row">
+                     <div class="col-md-12 col-lg-12">
+                       <h5>{{shopname}}</h5>
+                       <div class="grid-list-view d-flex align-items-center mtb-20">
+                         <ul class="nav tabs-area d-flex align-items-center">
+                           <li><a class="active" data-bs-toggle="tab" href="#today">Toady</a></li>
+                           <li><a data-bs-toggle="tab" href="#secondDay">{{secondDay | date : 'dd MMM'}}</a></li>
+                           <li><a data-bs-toggle="tab" href="#thirdDay">{{thirdDay | date : 'dd MMM'}}</a></li>
+                         </ul>
+                       </div>
+
+                       <div class="tab-content">
+                         <div id="today" class="tab-pane fade show active">
+                           <div *ngIf="todayOpen === '' && todayClosed === ''">
+                             <div style="font-size: small;font-family: rubik;">
+                               <b>Shop Closed</b>
+                             </div>
+                           </div>
+                           <div *ngIf="todayOpen !== '' && todayClosed !== ''">
+                             <ng-container *ngFor="let item of _todaySlots">
+                               <ng-container *ngIf="currenttime < item.startNum">
+                                 <ng-container
+                                   *ngIf="checkBooking(item.start, item.end, today) === 'start'; else elseBlock">
+                                   <!-- <span *ngIf="!item.click" class="bookedChip">Booked</span> -->
+                                 </ng-container>
+                                 <ng-template #elseBlock>
+                                   <span *ngIf="!item.click" class="chip"
+                                     (click)="selectSloct(item, 'today')">{{item.start}}</span>
+                                   <span *ngIf="item.click" class="selectedchip"
+                                     (click)="selectSloct(item, 'today')">{{item.start}}</span>
+                                 </ng-template>
+                               </ng-container>
+                               <ng-template *ngIf="currenttime > item.startNum">
+                                 <div style="font-size: small;font-family: rubik;">
+                                   <b>Shop Closed</b>
+                                 </div>
+                               </ng-template>
+                             </ng-container>
+                           </div>
+                         </div>
+                         <div id="secondDay" class="tab-pane fade fix">
+                           <div *ngIf="secondDayOpen === '' && secondDayClosed === ''">
+                             <div style="font-size: small;font-family: rubik;">
+                               <b>Shop Closed</b>
+                             </div>
+                           </div>
+                           <div *ngIf="secondDayOpen !== '' && secondDayClosed !== ''">
+                             <ng-container *ngFor="let item of _secondDaySlots">
+                               <ng-container>
+                                 <ng-container
+                                   *ngIf="checkBooking(item.start, item.end, secondDay) === 'start'; else elseBlock">
+                                   <!-- <span *ngIf="!item.click" class="bookedChip">Booked</span> -->
+                                 </ng-container>
+                                 <ng-template #elseBlock>
+                                   <span *ngIf="!item.click" class="chip"
+                                     (click)="selectSloct(item, 'secondDay')">{{item.start}}</span>
+                                   <span *ngIf="item.click" class="selectedchip"
+                                     (click)="selectSloct(item, 'secondDay')">{{item.start}}</span>
+                                 </ng-template>
+                               </ng-container>
+                             </ng-container>
+                             <!-- <ng-container *ngFor="let item of _secondDaySlots">
+                              <span *ngIf="!item.click" class="chip" (click)="selectSloct(item, 'secondDay')">{{item.start}}</span>
+                              <span *ngIf="item.click" class="selectedchip" (click)="selectSloct(item, 'secondDay')">{{item.start}}</span>
+                            </ng-container> -->
+                           </div>
+                         </div>
+                         <div id="thirdDay" class="tab-pane fade fix">
+                           <div *ngIf="thirdDayOpen === '' && thirdDayClosed === ''">
+                             <div style="font-size: small;font-family: rubik;">
+                               <b>Shop Closed</b>
+                             </div>
+                           </div>
+                           <div *ngIf="thirdDayOpen !== '' && thirdDayClosed !== ''">
+                             <ng-container *ngFor="let item of _thirdDaySlots">
+                               <ng-container>
+                                 <ng-container
+                                   *ngIf="checkBooking(item.start, item.end, thirdDay) === 'start'; else elseBlock">
+                                   <!-- <span *ngIf="!item.click" class="bookedChip">Booked</span> -->
+                                 </ng-container>
+                                 <ng-template #elseBlock>
+                                   <span *ngIf="!item.click" class="chip"
+                                     (click)="selectSloct(item, 'thirdDay')">{{item.start}}</span>
+                                   <span *ngIf="item.click" class="selectedchip"
+                                     (click)="selectSloct(item, 'thirdDay')">{{item.start}}</span>
+                                 </ng-template>
+                               </ng-container>
+                             </ng-container>
+                             <!-- <ng-container *ngFor="let item of _thirdDaySlots">
+                              <span *ngIf="!item.click" class="chip" (click)="selectSloct(item, 'thirdDay')">{{item.start}}</span>
+                              <span *ngIf="item.click" class="selectedchip" (click)="selectSloct(item, 'thirdDay')">{{item.start}}</span>
+                            </ng-container> -->
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+           <div class="your-order-table table-responsive">
+             <table>
+               <thead>
+                 <tr>
+                   <th class="product-name">Product</th>
+                   <th class="product-total">Total</th>
+                 </tr>
+               </thead>
+               <tfoot>
+                 <tr class="cart-subtotal">
+                   <th>Service Cart Subtotal</th>
+                   <td><span class="amount">₹{{serviceCarts.serviceCartSubtotal}}</span></td>
+                 </tr>
+                 <tr class="cart-subtotal">
+                   <th>Discount</th>
+                   <td><span class="amount">₹{{serviceCarts.discountAmount}}</span></td>
+                 </tr>
+                 <tr class="order-total">
+                   <th>Order Total</th>
+                   <td><span class="amount">₹{{serviceCarts.totalPayAmount}}</span></td>
+                 </tr>
+               </tfoot>
+             </table>
+           </div>
+           <div class="payment-method">
+             <div id="accordion">
+               <div style="text-align: center;">
+                 <button class="return-customer-btn" [disabled]="serviceCarts.carts.length === 0 || loading" (click)="payment()">Payment <i class="fa fa-circle-o-notch fa-spin"
+                     *ngIf="loading" aria-hidden="true"></i></button>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
